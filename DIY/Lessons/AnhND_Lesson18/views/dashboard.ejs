@@ -9,13 +9,17 @@
    <script src="/scripts/libs/jquery/jquery.min.js" charset="utf-8"></script>
 </head>
 <body>
-   <h1 id="title"></h1>
+   <h1 id="title">DevelophVN</h1>
    <div class="site-content">
       <div class="forecast-table">
          <div class="container">
-
+            <div class="forecast-container">
+               <%- include('news/weather.ejs') %>
+            </div>
          </div>
       </div>
    </div>
+
+   <script src="/scripts/index.js"></script>
 </body>
 </html>
