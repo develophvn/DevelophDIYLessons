@@ -21,8 +21,6 @@ const Weather = {
 	async init() {
 		const weatherData = await Weather.getWeatherData();
 
-		console.log(weatherData);
-
 		$(".location").text(weatherData.name);
 		$(".degree > .num").html(weatherData.temp  + "<sup>o</sup>C");
 		$("#weather-icon").attr("src", weatherData.iconURL);

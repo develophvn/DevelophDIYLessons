@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { PORT, __dirname } from '../config.js';
+import { PORT } from '../config.js';
 import uiRouter from '../ui/router.js';
 
 const app = express();
