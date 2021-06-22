@@ -34,6 +34,15 @@ class Todos {
 
 		return this.model.updateOne(query, update);
 	}
+
+	addNewItem(title) {
+		const insert = {
+			title,
+			checked: false,
+		}
+
+		return this.model.insertMany([insert]);
+	}
 }
 
 export default new Todos();

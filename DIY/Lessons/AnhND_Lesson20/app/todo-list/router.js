@@ -11,5 +11,12 @@ router.post('/item/check',async (req, res) => {
 	res.send(true);
 });
 
+router.post('/item/',async (req, res) => {
+	const { title } = req.body;
+
+	await Todos.addNewItem(title);
+	res.send(true);
+});
+
 
 export default router;
