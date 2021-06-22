@@ -18,5 +18,12 @@ router.post('/item/',async (req, res) => {
 	res.send(true);
 });
 
+router.delete('/item/',async (req, res) => {
+	const { itemId } = req.body;
+
+	await Todos.removeById(itemId);
+	res.send(true);
+});
+
 
 export default router;

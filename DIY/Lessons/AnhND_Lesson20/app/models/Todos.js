@@ -43,6 +43,14 @@ class Todos {
 
 		return this.model.insertMany([insert]);
 	}
+
+	removeById(itemId) {
+		const query = {
+			_id: itemId,
+		};
+
+		return this.model.deleteOne(query);
+	}
 }
 
 export default new Todos();

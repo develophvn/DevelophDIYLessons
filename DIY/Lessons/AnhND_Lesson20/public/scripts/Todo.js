@@ -1,9 +1,8 @@
 const Todo = {
 	init() {
 		const self = this;
-		const todoList = $('.todo-item');
 
-		todoList.click(function () {
+		$('.todo-item').click(function () {
 			const id = $(this).attr('data-id');
 			$(this).toggleClass('checked');
 
@@ -20,6 +19,13 @@ const Todo = {
 
 			self.addNewItem(title);
 		});
+
+		$('.close').click(function() {
+			const container = $(this).parent()[0];
+			const id = $(container).attr('data-id');
+			
+			self.removeItem(id);
+		})
 	},
 
 	async changeCheckedItem(itemId, checked) {
@@ -29,7 +35,7 @@ const Todo = {
 		}
 
 		await $.post('/todo/item/check', requestBody);
-		window.location.reload();
+		// window.location.reload();
 	},
 
 	async addNewItem(title) {
@@ -38,6 +44,18 @@ const Todo = {
 		}
 
 		await $.post('/todo/item', requestBody);
+		window.location.reload();
+	},
+
+	async removeItem(itemId) {
+		const request = {
+			url: '/todo/item',
+			type: 'DELETE',
+			data: {
+				itemId
+			}
+		}
+		await $.ajax(request);
 		window.location.reload();
 	}
 }
