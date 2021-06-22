@@ -1,5 +1,5 @@
 {
-  "name": "AnhND_Lesson18",
+  "name": "AnhND_Lesson20",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,6 +15,7 @@
     "axios": "^0.21.1",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "mongoose": "^5.12.14",
     "xml2js": "^0.4.23"
   }
 }
