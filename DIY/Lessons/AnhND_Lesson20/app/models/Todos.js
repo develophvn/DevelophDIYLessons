@@ -1,17 +1,39 @@
 import mongoose from 'mongoose';
 
-const TodosSchema = new mongoose.Schema({
-	title: {
-		type: String,
-		require: true,
-	},
-	checked: {
-		type: Boolean,
-		require: true,
+class Todos {
+	constructor() {
+		const TodosSchema = new mongoose.Schema({
+			title: {
+				type: String,
+				require: true,
+			},
+			checked: {
+				type: Boolean,
+				require: true,
+			}
+		}, {
+			timestamps: true
+		});
+
+		this.model = mongoose.model('Todos', TodosSchema);
 	}
-}, {
-	timestamps: true
-})
 
+	findAll() {
+		return this.model.find({});
+	}
 
-export default mongoose.model('Todos', TodosSchema)
+	updateCheckedItem(itemId, checked) {
+		const query = {
+			_id: itemId,
+		};
+		const update = {
+			$set: {
+				checked
+			}
+		};
+
+		return this.model.updateOne(query, update);
+	}
+}
+
+export default new Todos();

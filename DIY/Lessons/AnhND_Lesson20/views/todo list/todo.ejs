@@ -7,10 +7,13 @@
 	   </div>
 	   <ul class = "todo-list">
 		<% for(const todo of todos) { %>
-			<li class="<% if (todo.checked) { %> checked <% } %>">
+			<li class="todo-item <% if (todo.checked) { %> checked <% } %>" data-id ="<%= todo._id %>">
 				<%= todo.title %>
+				<span class="close">×</span>
 			</li>
 		<% } %>
 	   </ul>
 	</div>
  </div>
+
+ <script src="/scripts/Todo.js"></script>

@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
 	const xmlData = await readData();
 
 	const newsData = await processData(xmlData);	
-	const todos = await Todos.find({});
+	const todos = await Todos.findAll();
 
 	if (newsData.length > NEWS_LIMIT) {
 		newsData.length = NEWS_LIMIT;
