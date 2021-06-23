@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>News</title>
+
+   <link rel="stylesheet" href="/styles/style.css">
+
+   <script src="/scripts/libs/jquery/jquery.min.js" charset="utf-8"></script>
+</head>
+<body>
+   <h1 id="title">DevelophVN</h1>
+   <div class="site-content">
+      <div class="forecast-table">
+         <div class="container">
+            <div class="forecast-container">
+               <%- include('news/weather.ejs') %>
+               <%- include('news/news.ejs') %>
+            </div>
+            <%- include('todo list/todo.ejs') %>
+         </div>
+      </div>
+   </div>
+
+   <script src="/scripts/index.js"></script>
+</body>
+</html>
