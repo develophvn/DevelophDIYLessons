@@ -45,7 +45,7 @@
 - Để Git biết thư mục nào cần phải duy trì, git cần một thư mục ẩn `.git`. Từ CLI, mình có thể tạo thư mục này bằng câu lệnh `git init`
 - Git sẽ duy trì các thông tin tại ít nhất 2 môi trường chính:
     - `local`: máy tính hiện đang sử dụng vủa các developer
-    - `remote`: thường là một máy tính ở trên đám mây, thường được quản lí bởi các dịch vụ như GitHub, GitLab
+    - `remote`: thường là một máy tính ở trên đám mây, thường được quản lí bởi các dịch vụ như GitHub, GitLab. những dự án được lưu trử trên đây thường được gọi là `repository`
 - Những môi trường này sẽ duy trì độc lập với nhau và những developer phải update thủ công nếu muốn đồng bộ hóa nhưng môi trường này
 
 #### Trường hợp 1: Lưu trữ phiên bản hiện tại của dự án
@@ -60,8 +60,28 @@
 ### Concept of Modularity
 
 - Khi nhìn một chút vào thiết kế của những chương trình CLI hay Git, chúng ta thấy một điểm tương đồng là các chương trình đi theo hướng chia để trị (vd: một chương trình CLI thường sẽ có một nhiệm vụ nhất định, một commit của git chỉ duy trì một thời điểm nhất định, etc)
+- Đây là một khái niệm rất phổ biến khi xây dựng phần mềm. Khái niệm này (tên gọi khác là Single Responsibility Principle) ám chỉ rằng những tính năng, thông tin hay quá trình xử lí khác nhau thì nên được duy trì một cách cô lập. Một cách giải thích khác ở đây là mỗi một đơn vị (function, file, service, etc) thường chỉ có một và chỉ một trách nhiệm duy nhất
+- Khi chúng ta đi theo khái niệm này, việc xây dựng và quản lí phần mềm sẽ trở nên dễ dàng hơn, đặc biệt là khi sản phẩm có những vấn đề cần phải sửa
+
+#### Vậy lầm thế nào để các đơn vị này có thể trao đổi dữ liệu được với nhau?
+
+- Các đơn vị sẽ khai báo đây là những dịch vụ hay tính năng mà đơn vị đó cần trước khi bắt đầu đi làm nhiệm vụ của mình. Sự khai báo này được gọi là `Dependency Injection`
+- Những dịch vụ được phụ thuộc cũng sẽ phải khai báo rằng đây là những tính năng mà các đơn vị khác được phép sử dụng
+- Hầu hết các ngôn ngữ lập trình thường được xây dựng tính năng này:
+    - Python
+    ```
+    import numpy
+    ```
+    - JavaScript
+    ```
+    const lodash = require("lodash")
+    // hoặc
+    import lodash from "lodash"
+    ```
 
 ## Actions
+- Tạo một tài khoản GitHub và nhờ mentor để tham gia vào nhóm Develophvn
+- Tạo một dự án mới ở GitHub với DevelophVN Organization. Đây sẽ là nơi sản phẩm DIY được phát triển và lưu trữ
 ## Extra Resources
 
 - [What is CLI? (https://www.hostinger.com/tutorials/what-is-cli)](https://www.hostinger.com/tutorials/what-is-cli)
