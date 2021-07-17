@@ -16,10 +16,51 @@
 
 ### CLI
 
-- khi xây dựng hay phát triển phần mềm, các lập trình viên thường sử dụng Command Line Interface (CLI) để có thể giao tiếp trực tiếp hơn với máy tính. 
+#### Giới thiệu
+- khi xây dựng hay phát triển phần mềm, các lập trình viên thường sử dụng Command Line Interface (CLI) để có thể nói chuyện rất trực tiếp với máy tính. CLI thường sẽ rất tối ưu hóa trong việc xử lí và hiển thị các dữ liệu, giúp máy tính sử dụng rất ít tài nguyên những lại có thể truyền tải thông tin đến người dùng một cách hiệu quả.
+- Tùy vào các hệ điều hành hay các môi trường khác nhau, CLI cũng có những phiên bản khác nhau
+    
+    - PowerShell
+    - Bash
+    - GitBash
+    - Shell
+    - Zsh
+    - Fish
+
+- Về mặt nền tảng, những phiên bản này đều có mục đích giống nhau (gửi lệnh cho máy tính). Song vì cách vận hành khác nhau (do cấu trúc hệ điều hành khác nhau, môi trường khác nhau, etc), các câu lệnh có chút thay đổi và một số chương trình sẽ không tương thích trên mọi CLI
+- Tại Developh, chúng ta sẽ tập trung vào Bash (Mac, Linux) và Git Bash (Windows) để những chương trình được giới thiệu sẽ chạy dễ dàng hơn
+
+#### Trường hợp 1: Truy cập vào các thư mục khác nhau
+
+#### Trường hợp 2: Cài đặt chương trình
+#### Trường hợp 3: Chạy các chương trình
+
+#### Lưu ý
 
 ### Git
+#### Giới thiệu
+
+- Git là công cụ phổ biến để lưu trữ và duy trì lịch sử của một thư mục (có file nào được cho vào, file nào bị xóa, hay dữ liệu trong file thay đổi như thế nào)
+- Để có thể làm được điều này, Git sẽ theo dõi biến đổi của từng file trong thư mục và lưu trử những biến đổi đó trong một thứ gọi là `Commit`
+- Để Git biết thư mục nào cần phải duy trì, git cần một thư mục ẩn `.git`. Từ CLI, mình có thể tạo thư mục này bằng câu lệnh `git init`
+- Git sẽ duy trì các thông tin tại ít nhất 2 môi trường chính:
+    - `local`: máy tính hiện đang sử dụng vủa các developer
+    - `remote`: thường là một máy tính ở trên đám mây, thường được quản lí bởi các dịch vụ như GitHub, GitLab
+- Những môi trường này sẽ duy trì độc lập với nhau và những developer phải update thủ công nếu muốn đồng bộ hóa nhưng môi trường này
+
+#### Trường hợp 1: Lưu trữ phiên bản hiện tại của dự án
+#### Trường hợp 2a: Lấy phiên bản mới nhất của một dự án mới bằng Git
+#### Trường hợp 2b: Lấy phiên bản mới nhất của một dự án đã bắt đầu phát triển bằng Git
+#### Trường hợp 3: Tạo ra nhưng phiên bản song song (để thử nghiệm tính năng mới, duy trì các phiên bản khác nhau etc)
+#### Trường hợp 4: Kết hợp 2 phiên bản lại thành 1
+#### Trường hợp 5: Quay trở lại một phiên bản cũ trong quá khứ
+
+#### Lưu ý
+
 ### Concept of Modularity
+
+- Khi nhìn một chút vào thiết kế của những chương trình CLI hay Git, chúng ta thấy một điểm tương đồng là các chương trình đi theo hướng chia để trị (vd: một chương trình CLI thường sẽ có một nhiệm vụ nhất định, một commit của git chỉ duy trì một thời điểm nhất định, etc)
+
 ## Actions
 ## Extra Resources
 
