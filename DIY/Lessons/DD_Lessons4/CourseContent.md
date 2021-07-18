@@ -29,13 +29,117 @@
 
 - Về mặt nền tảng, những phiên bản này đều có mục đích giống nhau (gửi lệnh cho máy tính). Song vì cách vận hành khác nhau (do cấu trúc hệ điều hành khác nhau, môi trường khác nhau, etc), các câu lệnh có chút thay đổi và một số chương trình sẽ không tương thích trên mọi CLI
 - Tại Developh, chúng ta sẽ tập trung vào Bash (Mac, Linux) và Git Bash (Windows) để những chương trình được giới thiệu sẽ chạy dễ dàng hơn
+- Để mở CLI:
+    
+    - Mac: Mở ứng Terminal đã được cài đặt sẵn trên mọi máy Mac
+    - Windows: Cài đặt Git Bash bằng cách download phần mềm [Git (https://git-scm.com/downloads)](https://git-scm.com/downloads)
+
+Sau khi mở CLI, chúng ta sẽ thấy một giao diện như sau 
+:
+```bash
+bdatd@DESKTOP-DJ6USCP MINGW64 ~
+$
+```
+Mac:
+```bash
+```
+tại đây:
+
+- `bdatd@DESKTOP-DJ6USCP` là tên người dùng và tên máy tính
+- `MINGW64` chương trình đặc biệt được CLI sử dụng (có thể bỏ qua)
+- `~` là cách viết tắt thư mục mặc định của người dùng (ở Windows sẽ là `/c/Users/<tên ng dùng>`, ở Mac sẽ là `/Users/<tên ng dùng>`). 
+- `$` là nơi bắt đầu nhận câu lệnh từ người sử dụng
 
 #### Trường hợp 1: Truy cập vào các thư mục khác nhau
 
+1. Để có thể xem hiên tại mình đang ở thư mục nào, chúng ta sẽ dùng
+```bash
+$ pwd 
+/c/Users/bdatd
+```
+2. Để xem trong thư mục hiện tại có những thư mục gì
+```bash
+$ ls 
+'3D Objects'/                                                                                   OneDrive/
+ AppData/                                                                                       Pictures/
+'Application Data'@                                                                             Postman/
+ Contacts/                                                                                      PrintHood@
+ Cookies@                                                                                       Recent@
+ Documents/                                                                                    'Saved Games'/
+ Downloads/                                                                                     Searches/
+ Favorites/                                                                                     SendTo@
+ #...
+```
+
+* những item có dấu `/` ở cuối là ám chỉ những thư mục. dấu `@` ở cuối thường là những chương trình. không có dấu có nghĩ là những tệp file
+3. Để có thể truy cập một thư mục con
+```bash
+# cd <tên thư mục con>
+bdatd@DESKTOP-DJ6USCP MINGW64 ~
+$ cd Pictures/
+
+bdatd@DESKTOP-DJ6USCP MINGW64 ~/Pictures
+$
+
+# Nếu thư mục có dấu cách thì cần có dấu `\` trước những dấu cách đó
+$ cd Saved\ Games/
+```
+
+4. Nếu muốn truy cập thư mục mẹ của thư mục hiện tại
+```bash
+bdatd@DESKTOP-DJ6USCP MINGW64 ~/Pictures
+$ cd ..
+
+bdatd@DESKTOP-DJ6USCP MINGW64 ~
+$
+```
+
+* Ngoài ra, chúng ta có truy cập thư mục con của một thư mục bằng cách nối tiếp các tên thư mục với nhau bằng `/`
+```bash
+$ cd ~/Documents/My\ Music/
+
+$ cd ../../../ # ám chỉ thư mục mẹ của thư mục mẹ của thư mục mẹ
+```
+
 #### Trường hợp 2: Cài đặt chương trình
+
+1. Để có thể cài đặt các chương trình qua CLI, chúng ta cần một chương trình quản lí chương trình (Package manager) cho CLI đó. Ở Mac thường dùng `brew` còn ở Windows thường dùng `Chocolatey`. Link và hướng dẫn cài đặt đã được post tại [Curriculum của DIY camp](https://docs.google.com/spreadsheets/d/1ZR0JhasZGJJ88ngb8VqV6Lx06WLkDUwjpSIiEf6hUus/edit#gid=691196640)
+
+2. Để cài đặt chương trình, chúng ta cần biết tên chương trình đó. *Lưu ý: cùng một chương có thể sẽ có tên hơi khác nhau một chút trên những package manager khác nhau*
+```
+# Mac Bash
+$ brew install git
+
+# Windows Git Bash
+$ choco install git
+```
+
+* Khi một số chương trình khi cài đặt sẽ đòi hỏi quyền điều hành trực tiếp từ Mac và Windows. Để trao quyền điều hành này:
+```
+# Mac Bash 
+$ sudo brew install git
+
+# Khi chạy git bash cần chạy với quyền Admin (chuột phải -> Run as Administrator)
+$ choco install git
+```
+
 #### Trường hợp 3: Chạy các chương trình
 
-#### Lưu ý
+1. Để có thể chạy chương trình, chúng ta sẽ chạy bằng tên của chúng. Trước hết chúng ta nên kiểm tra xem chương trình đó có tồn tại trong máy tính hay không
+```bash
+# which là câu lệnh đẻ kiểm tra. which <tên chương trình>
+$ which git
+/mingw64/bin/git
+```
+
+2. Nếu chương trình có tồn tại, chúng ta có thể chay chương trình bằng cách gọi tên chương trình như một khẩu lệnh
+```bash
+$ git
+# ...
+```
+
+#### Trường hợp 4: Dừng một chương trình đang chạy
+1. Một số chương trình có thể chạy trên liên tục trong CLI. để có thể dừng những chương trình này chúng ta sẽ dùng tổ hợp phìm `Ctrl + C` (`Ctrl + C` hoặc `Cmd + C` cho Mac)
 
 ### Git
 #### Giới thiệu
