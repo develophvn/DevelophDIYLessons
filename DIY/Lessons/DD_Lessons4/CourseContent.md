@@ -146,20 +146,130 @@ $ git
 
 - Git là công cụ phổ biến để lưu trữ và duy trì lịch sử của một thư mục (có file nào được cho vào, file nào bị xóa, hay dữ liệu trong file thay đổi như thế nào)
 - Để có thể làm được điều này, Git sẽ theo dõi biến đổi của từng file trong thư mục và lưu trử những biến đổi đó trong một thứ gọi là `Commit`
+    
+    - những `Commit` này bao gồm cả tính năng giúp developer có thể mô tả chi tiết những biến đổi có ý nghĩa thế nào đối với sản phẩm
 - Để Git biết thư mục nào cần phải duy trì, git cần một thư mục ẩn `.git`. Từ CLI, mình có thể tạo thư mục này bằng câu lệnh `git init`
+- Git quản lý các phiên bản song bằng thuật ngữ nhánh (branch). mỗi nhánh thường sẽ có lịch sử của riêng mình và cô lập so với các nhánh khác.
 - Git sẽ duy trì các thông tin tại ít nhất 2 môi trường chính:
     - `local`: máy tính hiện đang sử dụng vủa các developer
-    - `remote`: thường là một máy tính ở trên đám mây, thường được quản lí bởi các dịch vụ như GitHub, GitLab. những dự án được lưu trử trên đây thường được gọi là `repository`
+    - `origin`: hay có tên gọi khác là `remote` thường là một máy tính ở trên đám mây, thường được quản lí bởi các dịch vụ như GitHub, GitLab. những dự án được lưu trử trên đây thường được gọi là `repository`
 - Những môi trường này sẽ duy trì độc lập với nhau và những developer phải update thủ công nếu muốn đồng bộ hóa nhưng môi trường này
 
 #### Trường hợp 1: Lưu trữ phiên bản hiện tại của dự án
-#### Trường hợp 2a: Lấy phiên bản mới nhất của một dự án mới bằng Git
-#### Trường hợp 2b: Lấy phiên bản mới nhất của một dự án đã bắt đầu phát triển bằng Git
-#### Trường hợp 3: Tạo ra nhưng phiên bản song song (để thử nghiệm tính năng mới, duy trì các phiên bản khác nhau etc)
-#### Trường hợp 4: Kết hợp 2 phiên bản lại thành 1
+
+1. Check xem hiện tại lịch sử của `local` với `origin` có đồng bộ với nhau không và hiện tại chúng ta đang ở nhánh nào
+```bash
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+```
+
+2. Đầu tiên chúng ta cần phải chọn những file mà chúng ta muốn duy trì lịch sử
+```bash
+# Chúng ta có thể duy trì file chi tiết
+$ git add CourseContent.md
+
+# Hoặc chúng ta có thể chọn duy trì lịch sử những file trong thư mục hiện tại
+$ git add .
+
+# Hoặc chúng ta có thể duy trì lịch sử toàn bộ những file trong repository này
+$ git add --all
+```
+
+3. Tiếp theo chúng ta cần tạo một `commit` để lưu những thay đổi của phiên bản này
+```bash
+# git commit -m "<những chi tiết của biến đổi này>"
+$ git commit -m "fix: add trường hợp thứ 1 của git"
+```
+
+4. Sau khi lưu xong, chúng ta cần đồng bộ `local` và `origin`. Tại trường hợp này, sau khi commit xong, môi trường `local` của chúng ta có những thứ mới hơn so với `origin`. Vì vậy chúng ta cần đồng bộ với môi trường `origin` bằng cách update những commit mới
+```bash
+# git push -u origin <tên nhánh chúng ta đang sử dụng>
+$ git push -u origin main
+```
+
+#### Trường hợp 2a: Lấy một dự án mới bằng Git
+
+1. trước tiên chúng ta cần có link dự án. Ví dụ đây là link một dự án trên github `https://github.com/develophvn/DevelophDIYLessons.git`
+
+2. Clone dự án vào một thư mục trên máy tính
+```bash
+# truy cập vào nơi muốn lưu trữ dự án
+$ cd ~/gits
+
+# clone dự án bằng câu lệnh sau
+$ git clone https://github.com/develophvn/DevelophDIYLessons.git
+
+# Một số link sẽ bắt đằng nhập băng tài khoảng GitHub
+```
+
+3. truy cập vào dự án
+```bash
+$ cd DevelophDIYLessons/
+```
+
+
+#### Trường hợp 2b: Lấy phiên bản mới nhất của một nhánh bằng Git
+
+1. Trước tiên chúng ta cần truy cập vào nhánh mà chúng ta muốn lấy phiên bản mới nhất
+
+```bash
+# git checkout <tên nhánh>
+$ git checkout main
+```
+
+2. Kéo phiên bản mới nhất từ trên môi trường `origin` về
+```bash
+$ git pull
+```
+
+* Nếu ở môi trường `local` có các thay đổi hay các commit mới, câu lệnh này sẽ thử kết hợp các lịch sử với nhau. Đôi lúc, việc kết hợp này sẽ không thành và cần developer trực tiếp sửa những biến đổi này
+
+3. Đồng bộ hóa môi trường `local` và `origin`
+```bash
+$ git push
+```
+
+#### Trường hợp 3: Tạo ra nhưng nhánh mới (để thử nghiệm tính năng mới, duy trì các phiên bản song etc)
+
+1. tạo một nhánh mới ở môi trường local. Nhánh này sẽ có lịch sử bắt đầu từ lịch sử của nhánh hiện tại chúng ta đáng sử dụng
+```bash
+# git checkout -b <tên của nhánh mới>
+$ git checkout -b new-branch
+```
+
+2. xây dựng các tính năng thử nghiệm mới (add --> commit)
+
+3. Nếu thử nghiệm thành công, chúng ta có thể đồng bộ hóa nhánh mới này lên môi trường origin
+```bash
+$ git push -u origin new-branch
+```
+
+#### Trường hợp 4: Kết hợp những thay đổi của 1 nhánh này sang 1 nhánh kahsc
+
+1. Sau khi đồng bộ một nhánh mới trên `origin`, chúng ta thể vào GitHub để thực hiện quá trình pull request
+    
+    a. Pull Request là cách phổ biến để gửi những tính năng để những developer khác trong nhóm có thể đọc và đánh giá chất lượng code trước khi kết hợp những thay đổi của nhánh
+    b. pull request thường sẽ chia sẻ nhưng thông tin liên quan đến tính năng này. Ở GitHub, Pull Request có bao gồm những bước như approval, changes request, etc
+
+2. Sau khi pull request được chấp nhận, chúng ta có thể tiến hành quá trình kết hợp (merge) các nhánh với nhau
+
 #### Trường hợp 5: Quay trở lại một phiên bản cũ trong quá khứ
 
-#### Lưu ý
+1. Đầu tiên chúng ta cần tìm va copy ID của commit mà chúng ta muốn quay lại trên github
+
+2. Tiếp theo chúng ta tạo một `revert commit` để quay lại
+```bash
+# git revert <commit-id>
+$ git revert 33115bcd44c06cd4fd8459510401295076928396 
+```
+
+3. Đồng bộ hóa với môi trường remote
+```bash
+$ git push -u origin main
+```
 
 ### Concept of Modularity
 
