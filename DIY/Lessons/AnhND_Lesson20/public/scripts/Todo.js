@@ -2,17 +2,22 @@ const Todo = {
 	init() {
 		const self = this;
 
-		$('.todo-item').click(function () {
-			const id = $(this).attr('data-id');
-			$(this).toggleClass('checked');
+		const todoItems = document.getElementsByClassName('todo-item');
+		for(const item of todoItems) {
+			item.addEventListener('click', function(e) {
+				const id = this.getAttribute('data-id');
+				this.classList.toggle('checked');
 
-			const newChecked = $(this).hasClass('checked');
+				const newChecked = this.classList.contains('checked');
 
-			self.changeCheckedItem(id, newChecked);
-		});
+				self.changeCheckedItem(id, newChecked);
+			})
+		}
 
-		$('.addBtn').click(function() {
-			const title = $('input').val();
+		const addBtn = document.getElementById('addBtn');
+		addBtn.addEventListener('click', function(e) {
+			const input = document.getElementsByTagName('input')[0];
+			const title = input.value;
 			if (!title) {
 				return;
 			}
@@ -20,12 +25,15 @@ const Todo = {
 			self.addNewItem(title);
 		});
 
-		$('.close').click(function() {
-			const container = $(this).parent()[0];
-			const id = $(container).attr('data-id');
-			
-			self.removeItem(id);
-		})
+		const closeBtns = document.getElementsByClassName('close');
+		for(const btn of closeBtns) {
+			btn.addEventListener('click', function(e) {
+				const container = this.parentElement;
+				const id = container.getAttribute('data-id');
+
+				self.removeItem(id);
+			})
+		}
 	},
 
 	async changeCheckedItem(itemId, checked) {
@@ -33,9 +41,8 @@ const Todo = {
 			itemId,
 			checked
 		}
-
-		await $.post('/todo/item/check', requestBody);
-		// window.location.reload();
+		await Ajax.post('/todo/item/check', requestBody);
+		window.location.reload();
 	},
 
 	async addNewItem(title) {
@@ -43,23 +50,20 @@ const Todo = {
 			title,
 		}
 
-		await $.post('/todo/item', requestBody);
+		await Ajax.post('/todo/item', requestBody);
 		window.location.reload();
 	},
 
 	async removeItem(itemId) {
-		const request = {
-			url: '/todo/item',
-			type: 'DELETE',
-			data: {
-				itemId
-			}
-		}
-		await $.ajax(request);
+		const requestBody = {
+			itemId,
+		};
+
+		await Ajax.delete('/todo/item', requestBody);
 		window.location.reload();
 	}
 }
 
-$(document).ready(function () {
+document.addEventListener('DOMContentLoaded', function(e) {
 	Todo.init();
-});
+})

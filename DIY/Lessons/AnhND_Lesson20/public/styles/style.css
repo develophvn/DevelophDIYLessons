@@ -114,7 +114,7 @@ input {
 }
 
 /* Style the "Add" button */
-.addBtn {
+#addBtn {
    padding: 10px;
    width: 25%;
    height: 40px;
@@ -128,7 +128,7 @@ input {
    border-radius: 0;
 }
 
-.addBtn:hover {
+#addBtn:hover {
    background-color: #bbb;
 }
 

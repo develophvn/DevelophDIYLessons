@@ -1,19 +1,20 @@
 <div class="forecast-container">
-	<div class = "todo-list-container">
-	   <div class="todo-list-header">
-		 <h2>TODO List</h2>
-		 <input type="text" placeholder="Title...">
-		 <span class="addBtn">Add</span>
-	   </div>
-	   <ul class = "todo-list">
-		<% for(const todo of todos) { %>
-			<li class="todo-item <% if (todo.checked) { %> checked <% } %>" data-id ="<%= todo._id %>">
+	<div class="todo-list-container">
+		<div class="todo-list-header">
+			<h2>TODO List</h2>
+			<input type="text" placeholder="Title...">
+			<span id="addBtn">Add</span>
+		</div>
+		<ul class="todo-list">
+			<% for(const todo of todos) { %>
+			<li class="todo-item <% if (todo.checked) { %> checked <% } %>" data-id="<%= todo._id %>">
 				<%= todo.title %>
 				<span class="close">×</span>
 			</li>
-		<% } %>
-	   </ul>
+			<% } %>
+		</ul>
 	</div>
- </div>
+</div>
 
- <script src="/scripts/Todo.js"></script>
+<script src="/scripts/libs/Ajax.js"></script>
+<script src="/scripts/Todo.js"></script>

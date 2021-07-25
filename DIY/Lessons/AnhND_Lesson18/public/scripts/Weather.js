@@ -6,8 +6,10 @@ const Weather = {
 		const {latitude, longitude} = location;
   
 		const apiURL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
-		const  weatherData = await $.get(apiURL);
-  
+
+		const  weatherData = await fetch(apiURL)
+										.then(res =>  res.json());
+
 		let temp = Math.round(weatherData.main.temp - 273.15),
 		   {name} = weatherData,
 		   weather = weatherData.weather[0];
@@ -21,12 +23,12 @@ const Weather = {
 	async init() {
 		const weatherData = await Weather.getWeatherData();
 
-		$(".location").text(weatherData.name);
-		$(".degree > .num").html(weatherData.temp  + "<sup>o</sup>C");
-		$("#weather-icon").attr("src", weatherData.iconURL);
+		document.getElementsByClassName('location')[0].innerHTML = weatherData.name;
+		document.getElementsByClassName('num')[0].innerHTML = weatherData.temp  + "<sup>o</sup>C";
+		document.getElementById('weather-icon').setAttribute('src', weatherData.iconURL);
 	}
 }
 
-$(document).ready(function () {
+document.addEventListener('DOMContentLoaded', function(e) {
 	Weather.init();
-});
+})
