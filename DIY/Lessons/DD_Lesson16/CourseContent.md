@@ -97,10 +97,19 @@ TBD
 ### Component State
 TBD
 ### React LifeCycle
+TBD
+### Hooks
+TBD
+### Import/Export Component
+TBD
+### Using Other React Component Library
 
 ## Other Stuff
 ### Class Components
 TBD
 ## Actions
+- Bắt đầu ứng dụng React bằng CRA và ghi lên tài khoản GitHub
 ## Extra Resources
+- https://reactjs.org/docs/create-a-new-react-app.html
+- https://reactjs.org/
 
