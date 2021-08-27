@@ -1,4 +1,4 @@
-# Basic of React: Syntax, Components, State, LifeCycle
+# Basic of React
 
 ## Background
 
@@ -70,11 +70,11 @@ developh-react-lessons
 │   ├── index.html
 │   └── manifest.json
 └── src             # code của ứng dụng
-    ├── App.css
-    ├── App.js
+    ├── App.css     # styling của ứng dụng
+    ├── App.js      # nơi logic của ứng dụng bắt đầu
     ├── App.test.js
     ├── index.css
-    ├── index.js    # nơi bắt đầu
+    ├── index.js    # nơi React bắt đầu
     ├── logo.svg
     └── serviceWorker.js
     └── setupTests.js
@@ -83,30 +83,97 @@ developh-react-lessons
 #### Chạy CRA
 ```bash
 # Để chạy React trên máy tính
-npm start
+npm run start
 # Để xây dựng React thành ứng dụng hoàn chỉnh
 npm run build
 ```
 
+- Khi chạy trên máy tính, chúng ta có thể thay đổi code và trực tiếp nhìn thấy các thay đổi đó
+
 ## React Concept
 
-### Synyax and Structure
-TBD
-### Components (Functional) 
-TBD
-### Component State
-TBD
-### React LifeCycle
-TBD
-### Hooks
-TBD
-### Import/Export Component
-TBD
-### Using Other React Component Library
+### Syntax
+```JSX
+// Chúng ta thường nêu lên các file, dịch vụ, cần thiết ở đây
+import logo from './logo.svg';
+// import ... from "...";
 
-## Other Stuff
+// Chỉ react nên áp dụng styling nào
+import './App.css';
+
+// Phần quan trọng nhất - React Components
+function App() { 
+
+  // Logic của một components
+
+  const user = "DevelophVN";
+
+  // Mỗi react components đều sẽ trả lại JSX syntax, khá giống với HTML nhưng với khả năng sử dụng các biến đã nêu trong Logic
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Xin chào {user}
+        </p>
+      </header>
+    </div>
+  );
+}
+
+export default App; 
+```
+- Components là một đơn vị quan trọng của React, giúp bộ thư viện có thể tối ưu hóa các ứng dụng. Những component thường có logic cô lập với nhau và cố thể sử dụng đi sử dụng lại nhiều lần
+### Component State & Component Props
+
+- Component state thường ám chỉ những biến, logic, hay thông tin mà quyền sở hữu và quản lí thuộc về component đó. 
+- Component Props thường ám chỉ những biến, logic, hay thông tin mà quyền sở hữu và quản lí không thuộc về component đó (mà thuộc về một component/context khác)
+
+**Component thay đổi khi state hoặc props của component đó thay đổi**
+
+### Components Change Cycle
+
+React sẽ liên tục điều khiẻn và kiểm soát toàn bộ thông tin của toàn bộ các components. Component sẽ có vòng đời như sau
+
+![ReactLifeCycle](life.png)
+
+### Hooks
+
+Hooks giúp chúng ta có thể sử dụng các tính năng khác nhau của React và thường bắt đầu bằng `use`. 
+
+Một số hooks phổ biến
+
+```JSX
+[user, setUser] = useState("Developh"); // Giúp chúng ta tạo và sử dụng component state
+
+useEffect(() => {
+  // logic
+  return () => cleanup();
+
+}, []) // Giúp chúng ta phản ứng với các thay đổi trong vòng đời của components
+
+```
+
+*Chúng ta cũng thể tạo ra những hooks của riêng mình để có thể sử dụng lại các logic chúng ta tạo ra trong React*
+
+### Import/Export Component
+
+Chúng ta có thể chia các component khác nhau ra thành các file khác nhau và nhập chúng khi cần thiết. Điều này sẽ giúp những ứng dụng React chạy nhanh và nhẹ hơn
+
+## Others
 ### Class Components
-TBD
+
+- Khi tìm hiểu về React, đôi lúc chúng ta sẽ nhìn thấy các component được viết một dạng khác như sau
+```javascript
+//...Dependencies
+class Welcome extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
+//...exports
+```
+
 ## Actions
 - Bắt đầu ứng dụng React bằng CRA và ghi lên tài khoản GitHub
 ## Extra Resources
