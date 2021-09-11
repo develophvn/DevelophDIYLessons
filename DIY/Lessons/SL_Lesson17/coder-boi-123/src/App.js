@@ -11,8 +11,8 @@ const IMAGES = [onepieceimage, logo, blackguythinking, concerned];
 const NAMES = ["One Piece", "Logo", "Thinking", "Concerned"];
 // const onClick = function() {}
 
-function getRandomInt(max = IMAGES.length) {
-  return Math.floor(Math.random() * max);
+function getRandomInt(array) {
+  return array[Math.floor(Math.random() * array.length)];
 }
 
 /*
@@ -25,12 +25,15 @@ function App() {
   const [currentState, setCurrentState] = useState([1, 3, 2]);
   const [authorized, setAuthorized] = useState(true);
   const [name, setName] = useState(NAMES[0]);
+
+  
+
   const onClick = (index) => {
-    let set = new Set();
-    currentState.forEach((e) => set.add(e));
+    let availableImages = [...Array(IMAGES.length).keys()].filter(image => currentState.indexOf(image)<0);
+    console.log(availableImages);
 
     let temp = [...currentState];
-    temp[index] = getRandomInt();
+    temp[index] = getRandomInt(availableImages);
     setCurrentState(temp);
     // setCurrentState(getRandomInt());
     // setName(getRandomInt());

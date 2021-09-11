@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+## Setup
+Để tránh mất thời gian set up, mình đã setup sẵn 1 project. Clone project về là xài được luôn.
+```
+git clone https://github.com/sangle-developh/DevelophDIYLessons/ 
+cd DevelophDIYLessons
+git checkout patch-2 #Đây là tên branch
+cd DIY/Lessons/SL_Lesson17/colorful
+npm install
+npm start
+```
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Tổng quát
+Trong project, mình đã tạo sẵn 1 component Square với dimension 46px*46px và 2px margin. Component này có thể nhận vào 1 props color để thay đổi màu của hình vuông. Component này được viết dưới dạng styled component - nơi mà html, css, js đều ở trong cùng 1 component. 
 
-## Available Scripts
+```
+const  Square = ({ color, onClick, index }) => {
 
-In the project directory, you can run:
+	const  SquareComponent = styled.div`
+		min-height: 46px;
+		min-width: 46px;
+		max-height: 46px;
+		max-width: 46px;
+		background-color: ${color};
+		margin: 2px;
+	`;
 
-### `npm start`
+	return (
+		<SquareComponent  onClick={() =>  onClick(index)}  />
+	)
+}
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Tương tự, trong class App, chúng ta tạo 1 component SquareGroup để tạo ra giới hạn cho hình vuông. Có thể pass 1 props tên là numerOfSquares để xác định cần bao nhiêu diện tích để chứ các hình vuông.
+```
+const  SquareGroup = styled.div`
+	width: ${props  =>  Math.sqrt(props.numerOfSquares) * 50}px;
+	height: ${props  =>  Math.sqrt(props.numerOfSquares) * 50}px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-content: center;
+	justify-content: center;
+`
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Trong class App,  chúng ta gọi SquareGroup và tạo 1 hình vuông, vậy là xong setup
+```
+function  App() {
+	return (
+		<div  className="App">
+			<div  className="Frame">
+				<SquareGroup  numerOfSquares={100}>
+					<Square color={COLORS[value]}/>
+				</SquareGroup>
+			</div>
+		</div>
+	);
+}
+```
 
-### `npm test`
+## Testing
+Khi source code còn nhỏ, chúng ta còn có khả năng kiểm soát từng component thủ công, nhưng khi source code trở nên cồng kềnh hơn, khả năng test từng function 1 là không thể.
+Tìm hiểu thêm tại: https://jestjs.io/docs/
+Ví dụ ở trên, chúng ta xài component của Square. Giả sử 1 ngày nào đó, 1 ai đó vào sửa Square và không check kĩ thì sẽ tạo ra bug trên prod. Vì vậy việc viết test cho component là cực kì quan trọng. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Map
+Chúng ta muốn tạo 100 hình vuông, nên không thể nào viết bằng tay được, vì vậy chúng ta sẽ xài map.
 
-### `npm run build`
+QQ: Tạo ra 100 hình vuông theo hình vuông
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## onClick
+QQ: Chúng ta tạo ra 100 hình vuông, làm sao để chuyển màu cho từng hình vuông?
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## useMemo và useCallback
+Mở chrome console lên, với mỗi lần update 1 hình vuông, các hình vuông còn lại có renđer lại hay không? Làm sao để tránh được điều này?
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Playtime
+Sử dụng function dưới đây để react render lại mỗi X mili giây:
+```
+var  cursor = 0;
+setInterval(function () {
+	// Do something here
+	cursor++;
+}, X);
+```
