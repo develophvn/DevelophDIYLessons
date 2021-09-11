@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import './App.css';
 import styled from 'styled-components';
 import Square from "./Components/Square/Square"
@@ -29,6 +29,14 @@ function App() {
     changeSquareColor(index);
     var i = 0;
   }, [])
+
+  useEffect(() => {
+    var cursor = 0;
+    const intervalId = setInterval(function () {
+      changeSquareColor(cursor % NUMER_OF_SQUARES);
+      cursor++;
+    }, 100);
+  }, []);
 
   return (
     <div className="App">
