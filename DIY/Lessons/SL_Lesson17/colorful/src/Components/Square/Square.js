@@ -11,6 +11,7 @@ margin: 2px;
 `;
 
 const Square = ({ color, onClick, index }) => {
+    console.log("Render: ", color)
     return (
         <SquareComponent color={color} onClick={() => onClick(index)} />
     )
